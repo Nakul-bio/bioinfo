@@ -38,3 +38,69 @@ print(reverse_complement)
 rna=dna.replace("T","U")
 print("\nRNA sequence:")
 print(rna)
+
+length = len(dna)
+print("\nSequence length:")
+print(length)
+
+at_count = a_count + t_count
+at_content = (at_count / len(dna)) * 100
+print("\nAT content:")
+print(f"{at_content:.2f}%")
+
+print("\nStart Codon check:")
+if dna.startswith("ATG"):
+      print("start codon found!")
+else:
+     print("no start codon found.")
+
+
+codon_table = {
+    # Methionine (Start)
+    "ATG": "M",
+
+    # Phenylalanine
+    "TTT": "F",
+    "TTC": "F",
+
+    # Leucine
+    "TTA": "L",
+    "TTG": "L",
+    "CTT": "L",
+    "CTC": "L",
+    "CTA": "L",
+    "CTG": "L",
+
+    # Alanine
+    "GCT": "A",
+    "GCC": "A",
+    "GCA": "A",
+    "GCG": "A",
+
+    # Glycine
+    "GGT": "G",
+    "GGC": "G",
+    "GGA": "G",
+    "GGG": "G",
+
+    # Lysine
+    "AAA": "K",
+    "AAG": "K",
+
+    # Stop codons
+    "TAA": "*",
+    "TAG": "*",
+    "TGA": "*"
+}
+protein = ""
+for i in range(0,len(dna)-2,3):
+      codon = dna[i:i+3]
+      if codon in codon_table:
+        amino_acid = codon_table[codon]
+        if amino_acid == "*":
+            break
+        protein += amino_acid
+      else:
+        protein += "X"
+print("\nprotein_sequence:")
+print(protein)           
